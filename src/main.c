@@ -10,7 +10,6 @@
 
 int main() {
     iniciar_interface();
-    //iniciar_mural(); // Desabilitado para não gerar pedidos automáticos
     iniciar_tripulantes(1);
     iniciar_chefe();
 
@@ -18,11 +17,15 @@ int main() {
     char buffer[16];
     while (!sair) {
         atualizar_interface();
-        mvprintw(5, 0, "Pressione 'q' para sair ou digite um pedido (ex: 1b):");
+        mvprintw(5, 0, "(i) Instruções");
+        mvprintw(6, 0, "(q) Sair");
+        mvprintw(7, 0, "Digite um pedido (ex: 1b):");
         refresh();
         ler_string_usuario(buffer, sizeof(buffer));
         if (buffer[0] == 'q' || buffer[0] == 'Q') {
             sair = 1;
+        } else if (buffer[0] == 'i' || buffer[0] == 'I') {
+            mostrar_instrucoes();
         } else if (strlen(buffer) == 2 && buffer[0] >= '1' && buffer[0] <= '9') {
             int tripulante = buffer[0] - '0';
             char tipo = buffer[1];
